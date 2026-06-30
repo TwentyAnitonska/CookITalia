@@ -1,0 +1,612 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap');
+
+:root {
+  --color-green: #067b42;
+  --color-green-soft: #61b879;
+  --color-green-hover: #176339;
+  --color-red: #b22d32;
+  --color-red-soft: #5b1115;
+  --color-red-hover: #8d2024;
+  --color-white-logo: #f7f7f6;
+  --color-primary-theme: var(--color-green);
+  --color-primary-theme-hover: var(--color-green-hover);
+  --color-recipe-banner-gradient-start: var(--color-green);
+  --color-recipe-banner-gradient-end: var(--color-green-soft);
+  --color-background: #ffffff;
+  --color-navbar: #f8f8f8;
+  --color-card-bg: #f8f8f8;
+  --color-btn-bg: var(--color-white-logo);
+  --color-text-primary: #202124;
+  --color-text-secondary: #5f6368;
+  --color-text-muted: #5f6368;
+  --color-text-inverse: #ffffff;
+  --color-disabled-bg: #d0d4da;
+  --color-disabled-input-bg: color-mix(in srgb, var(--color-navbar) 93%, #000000);
+  --color-border: #f7f7f6;
+  --color-nav-hover: var(--color-primary-theme);
+  --favorite-accent: var(--color-primary-theme);
+  --color-search-bg: #ffffff;
+  --color-search-border: var(--color-border);
+  --color-search-border-active: #cccccc;
+  --color-search-divider: #eeeeee;
+  --color-search-icon: #757575;
+  --color-search-placeholder: #888888;
+  --color-search-text: #000000;
+  --color-search-hover-bg: #f1f3f4;
+  --color-search-hover-text: #000000;
+  --color-overlay-bg: rgba(0, 0, 0, 0.6);
+  --color-photo-overlay-bg: rgba(0, 0, 0, 0.42);
+  --color-focus-ring: color-mix(in srgb, var(--color-primary-theme) 25%, transparent);
+}
+
+.text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+.text-dark {
+  color: var(--color-text-primary) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: var(--color-text-primary);
+  transition: color 0.3s ease;
+}
+
+label, .form-label {
+  color: var(--color-text-secondary);
+  transition: color 0.3s ease;
+}
+
+.card-title {
+  color: var(--color-text-primary) !important;
+}
+
+/* ==========================================================================
+   STRUTTURA BASE DEL SITO
+   ========================================================================== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body,
+body * {
+  user-select: none;
+}
+
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  user-select: text;
+}
+
+/* ==========================================================================
+   STILI INPUT E PLACEHOLDER IN MODALITÀ SCURA (DARK MODE)
+   ========================================================================== */
+/* ==========================================================================
+   STILI INPUT E PLACEHOLDER DINAMICI
+   ========================================================================== */
+input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not(:disabled):not(.google-input):not(.form-control),
+textarea:not(:disabled):not(.form-control),
+select:not(:disabled):not(.form-control),
+.form-control:not(:disabled):not(.google-input) {
+  background-color: var(--color-input-bg) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-input-border) !important;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not(:disabled):not(.google-input):not(.form-control):focus,
+textarea:not(:disabled):not(.form-control):focus,
+select:not(:disabled):not(.form-control):focus,
+.form-control:not(:disabled):not(.google-input):focus {
+  background-color: var(--color-input-bg) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-primary-theme-hover) !important;
+  box-shadow: 0 0 0 0.25rem var(--color-focus-ring) !important;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder,
+.form-control::placeholder {
+  color: var(--color-input-placeholder) !important;
+  opacity: 1 !important;
+}
+
+
+/* ==========================================================================
+   GLOBAL BUTTON AND DROPDOWN STATES
+   ========================================================================== */
+body .btn:not(.btn-danger):not(.btn-outline-danger):not(.btn-danger-custom):not(.btn-close) {
+  background-color: var(--color-btn-bg);
+  border: 1px solid var(--color-primary-theme);
+  color: var(--color-primary-theme);
+  transition: all 0.3s ease;
+}
+
+body .btn:not(.btn-danger):not(.btn-outline-danger):not(.btn-danger-custom):not(.btn-close):hover,
+body .btn:not(.btn-danger):not(.btn-outline-danger):not(.btn-danger-custom):not(.btn-close):focus {
+  background-color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+  color: var(--color-text-inverse);
+}
+
+body .btn:not(.btn-danger):not(.btn-outline-danger):not(.btn-danger-custom):not(.btn-close):active {
+  background-color: var(--color-btn-bg);
+  border-color: var(--color-primary-theme);
+  color: var(--color-primary-theme);
+  box-shadow: none;
+}
+
+.dropdown-item {
+  color: var(--color-text-primary);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: transparent;
+  color: var(--color-nav-hover);
+}
+
+.dropdown-item:active {
+  background-color: var(--color-nav-hover);
+  color: var(--color-text-inverse);
+}
+
+.btn-primary-custom {
+  background-color: var(--color-btn-bg);
+  border: 1px solid var(--color-primary-theme);
+  color: var(--color-primary-theme);
+}
+
+.btn-primary-custom:hover,
+.btn-primary-custom:focus {
+  background-color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+  color: var(--color-text-inverse);
+}
+
+/* ==========================================================================
+   GLOBAL BUTTON HOVER LIFT ANIMATION
+   ========================================================================== */
+body .btn:not(.btn-close):not(:disabled):not(.disabled) {
+  transition: all 0.3s ease;
+}
+
+body .btn:not(.btn-close):not(:disabled):not(.disabled):hover {
+  transform: translateY(-2px);
+}
+
+body .btn:not(.btn-close):not(:disabled):not(.disabled):active {
+  transform: translateY(0);
+}
+
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button, .favorite-btn-remove):not(:disabled):not(.disabled):active {
+  transform: translateY(-2px);
+}
+
+/* Pulsante di chiusura bianco in modalità scura */
+.app-container.app-dark .btn-close {
+  filter: var(--bs-btn-close-white-filter, invert(1) grayscale(100%) brightness(200%));
+}
+
+/* ==========================================================================
+   PERSONALIZZAZIONE NAVBAR PER MODALITÀ (ICONA E DIVISORE)
+   ========================================================================== */
+.custom-divider {
+  border-left-color: var(--color-navbar-divider) !important;
+}
+
+.theme-icon {
+  color: var(--color-primary-theme);
+}
+
+/* ==========================================================================
+   STILI COMPONENTI (ELEMENTI GENERALI)
+   ========================================================================== */
+.slide-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--color-navbar);
+  /* Default light mode */
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Applica lo sfondo #121212 alle card in Dark Mode */
+.app-container.app-dark .slide-card {
+  background-color: var(--color-card-bg);
+}
+
+.app-container.app-dark .slide-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Utility per i pulsanti che devono usare il colore #242424 */
+.btn-custom-dark {
+  background-color: var(--color-btn-bg);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  transition: background-color 0.2s ease;
+}
+
+/* Pills Utility */
+.category-pill {
+  border-radius: 50px;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   SPLASH SCREEN / LOADER GLOBAL STYLES
+   ========================================================================== */
+.splash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-background);
+  z-index: 9999;
+  pointer-events: all;
+  transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-logo {
+  --layered-loader-size: 150px;
+  display: block;
+  width: 150px;
+  height: 150px;
+}
+
+.splash-text {
+  transition: color 0.3s ease;
+}
+
+/* Brand Logo styles shared globally */
+.brand-text {
+  font-weight: 700;
+  font-size: 1.6rem;
+  transition: font-size 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: font-size;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar-large .brand-text {
+  font-size: 1.8rem;
+}
+
+.logo-cook,
+.hero-logo-cook {
+  color: var(--color-green);
+}
+
+.logo-it,
+.hero-logo-it,
+.loader-it,
+.splash-it {
+  color: #ffffff;
+  -webkit-text-stroke: 1px #000000;
+  transition: -webkit-text-stroke 0.3s ease, color 0.3s ease;
+}
+
+.logo-alia,
+.hero-logo-alia {
+  color: var(--color-red);
+}
+
+.hero-brand {
+  font-weight: 700;
+}
+
+/* Dark Mode per CookITalia: rimuove il bordo dalla parte centrale del logo */
+.app-container.app-dark .logo-it,
+.app-container.app-dark .hero-logo-it,
+.app-container.app-dark .loader-it,
+.app-container.app-dark .splash-it,
+.splash-overlay.dark-mode .logo-it,
+.splash-overlay.dark-mode .splash-it {
+  color: #ffffff;
+  -webkit-text-stroke: 0px transparent;
+}
+
+.app-container.app-dark .logo-cook,
+.app-container.app-dark .hero-logo-cook {
+  color: var(--color-green);
+}
+
+.app-container.app-dark .logo-alia,
+.app-container.app-dark .hero-logo-alia {
+  color: var(--color-red);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+/* Block-level inline loader for nested page loaders */
+.block-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.block-loader .loader-logo {
+  --layered-loader-size: 80px;
+  display: block;
+  width: 80px;
+  height: 80px;
+}
+
+.block-loader .loader-text {
+  color: var(--color-text-primary);
+  letter-spacing: 0.12em;
+  font-size: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+/* Button-level inline loader for small buttons */
+.loader-logo-button {
+  --layered-loader-size: 20px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   DARK MODE — REGOLE SPOSTATE DA :global NEI COMPONENTI
+   ========================================================================== */
+
+/* --- AuthModal: btn-auth-submit e auth-toggle-link (dark → rosso) --- */
+.btn-auth-submit {
+  background-color: var(--color-btn-bg);
+  border: 1px solid var(--color-primary-theme);
+  color: var(--color-primary-theme);
+}
+
+.btn-auth-submit:hover,
+.btn-auth-submit:focus {
+  background-color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme-hover);
+  color: var(--color-text-inverse);
+}
+
+.auth-toggle-link {
+  color: var(--color-primary-theme);
+}
+
+.auth-toggle-link:hover {
+  color: var(--color-primary-theme-hover);
+}
+
+/* AuthModal: focus input (glow dinamico) */
+.form-control:focus {
+  background-color: var(--color-input-bg);
+  color: var(--color-text-primary);
+  border-color: var(--color-primary-theme-hover);
+  box-shadow: 0 0 0 0.25rem var(--color-focus-ring);
+}
+
+/* --- Favorite buttons --- */
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button, .favorite-btn-remove) {
+  background-color: transparent !important;
+  border: 1px solid var(--favorite-accent) !important;
+  color: var(--favorite-accent) !important;
+}
+
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button):not(.is-favorite):hover,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button):not(.is-favorite):hover:focus,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button):not(.is-favorite):hover:active {
+  background-color: var(--favorite-accent) !important;
+  border-color: var(--favorite-accent) !important;
+  color: var(--color-text-inverse) !important;
+}
+
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button):not(.is-favorite):focus,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button):not(.is-favorite):active,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button).is-favorite,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button).is-favorite:hover,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button).is-favorite:focus,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button).is-favorite:active,
+body .btn.favorite-btn-remove:hover,
+body .btn.favorite-btn-remove:focus,
+body .btn.favorite-btn-remove:active {
+  background-color: transparent !important;
+  border: 1px solid var(--favorite-accent) !important;
+  color: var(--favorite-accent) !important;
+  box-shadow: none !important;
+}
+
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button, .favorite-btn-remove) .favorite-heart,
+body .btn:is(.heart-btn, .detail-favorite-btn, .category-icon-button, .result-icon-button, .favorite-btn-remove) .bi-heart-fill {
+  color: currentColor;
+}
+
+/* --- SearchResultsView: sfondo e card Bootstrap in dark mode --- */
+.app-container.app-dark .search-results-view {
+  background-color: var(--color-background);
+}
+
+.app-container.app-dark .card {
+  background-color: var(--color-navbar);
+  border-color: var(--color-border);
+}
+
+/* --- RecipeOfTheDay: banner in dark mode --- */
+.app-container.app-dark .recipe-banner {
+  background: linear-gradient(135deg, var(--color-recipe-banner-gradient-start) 0%, var(--color-recipe-banner-gradient-end) 100%);
+  border: 1px solid var(--color-border);
+}
+
+/* --- RecipeDetailView: sfondo e list-group Bootstrap in dark mode --- */
+.app-container.app-dark .recipe-detail {
+  background-color: var(--color-background);
+}
+
+.app-container.app-dark .list-group-item {
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+
+
+/* --- DishCategoryView: sfondo in dark mode --- */
+.app-container.app-dark .dish-category-view {
+  background-color: var(--color-background);
+}
+
+/* --- Theme-aware accent styles --- */
+.text-primary-custom,
+.theme-icon,
+.recipe-meta-icon,
+.ingredient-dot {
+  color: var(--color-primary-theme);
+}
+
+.empty-icon {
+  color: var(--color-primary-theme) !important;
+}
+
+.text-primary-custom:hover {
+  color: var(--color-primary-theme-hover);
+}
+
+.back-link,
+.recipe-link,
+.auth-toggle-link {
+  color: var(--color-primary-theme);
+}
+
+.back-link:hover,
+.recipe-link:hover,
+.auth-toggle-link:hover {
+  color: var(--color-primary-theme-hover);
+}
+
+.alert-success {
+  --bs-alert-color: var(--color-primary-theme);
+  --bs-alert-bg: color-mix(in srgb, var(--color-primary-theme) 12%, var(--color-background));
+  --bs-alert-border-color: color-mix(in srgb, var(--color-primary-theme) 35%, var(--color-background));
+  color: var(--color-primary-theme);
+  background-color: var(--bs-alert-bg);
+  border-color: var(--bs-alert-border-color);
+}
+
+.recipe-type-badge,
+.recipe-tag {
+  background-color: color-mix(in srgb, var(--color-primary-theme) 12%, var(--color-navbar));
+  color: var(--color-primary-theme);
+}
+
+.recipe-type-badge :where(i, span),
+.recipe-tag :where(i, span) {
+  color: var(--color-primary-theme);
+}
+
+.recipe-title,
+.section-title {
+  color: var(--color-text-primary);
+}
+
+.section-rule,
+:where(.heart-btn, .detail-favorite-btn).spark-anim :where(.custom-spark),
+.custom-spark {
+  background-color: var(--color-primary-theme);
+}
+
+.settings-menu .list-group-item:hover,
+.settings-menu .list-group-item.active,
+.settings-select-option:hover,
+.settings-select-option.choosing {
+  background-color: var(--color-primary-theme);
+  color: var(--color-text-inverse);
+}
+
+.btn-outline-primary-custom,
+.carousel-button,
+.recipe-banner-button,
+.category-pill-custom {
+  color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+}
+
+.category-pill-custom :where(i, span) {
+  color: var(--color-primary-theme);
+}
+
+.btn-outline-primary-custom:hover,
+.carousel-button:hover,
+.recipe-banner-button:hover,
+.category-pill-custom:hover {
+  background-color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+  color: #f7f7f6;
+}
+
+.category-pill-custom:hover :where(i, span) {
+  color: #f7f7f6;
+}
+
+.carousel-button:active,
+.recipe-banner-button:active {
+  color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+}
+
+.switch-custom:checked,
+.step-number {
+  background-color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+}
+
+.step-number {
+  color: var(--color-navbar);
+}
+
+.btn-primary-custom:disabled {
+  border-color: var(--color-primary-theme);
+  color: var(--color-primary-theme);
+  background-color: var(--color-btn-bg);
+}
+
+.btn-danger-custom {
+  background-color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+  color: var(--color-text-inverse);
+}
+
+.btn-danger-custom:hover,
+.btn-danger-custom:focus {
+  background-color: var(--color-primary-theme-hover);
+  border-color: var(--color-primary-theme-hover);
+  color: var(--color-text-inverse);
+}
+
+.btn-danger-custom:active,
+.btn-danger-custom:active:focus {
+  background-color: var(--color-primary-theme);
+  border-color: var(--color-primary-theme);
+  color: var(--color-text-inverse);
+}
