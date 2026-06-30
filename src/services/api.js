@@ -1,5 +1,4 @@
 import { getAuth } from 'firebase/auth';
-import { mockRecipes } from './mockRecipes';
 
 // ============================================================
 //  SPOONACULAR API - Recipe data
@@ -145,18 +144,8 @@ export default {
           }
         }
       } catch (error) {
-        console.error('Error fetching recipes from API, falling back to mock:', error);
+        console.error('Error fetching recipes from API:', error);
       }
-    }
-    if (results.length === 0) {
-      const q = normalizeTitleForComparison(query || '');
-      const filtered = mockRecipes.filter(recipe => {
-        const titleNormalized = normalizeTitleForComparison(recipe.title || '');
-        const summaryNormalized = normalizeTitleForComparison(recipe.summary || '');
-        const typeNormalized = normalizeTitleForComparison(recipe.recipeTypeLabel || '');
-        return titleNormalized.includes(q) || summaryNormalized.includes(q) || typeNormalized.includes(q);
-      });
-      results = filtered.slice(0, limit);
     }
     return results;
   },
@@ -210,21 +199,8 @@ export default {
           }
         }
       } catch (error) {
-        console.error('Error fetching recommended from API, falling back to mock:', error);
+        console.error('Error fetching recommended from API:', error);
       }
-    }
-
-    if (results.length === 0) {
-      let filtered = [...mockRecipes];
-      if (prefs.vegetarian) filtered = filtered.filter(r => r.vegetarian);
-      if (prefs.vegan) filtered = filtered.filter(r => r.vegan);
-      if (prefs.dairyFree) filtered = filtered.filter(r => r.dairyFree);
-
-      if (filtered.length === 0) {
-        filtered = [...mockRecipes];
-      }
-
-      results = filtered.sort(() => 0.5 - Math.random()).slice(0, 6);
     }
     return results;
   },
@@ -246,30 +222,8 @@ export default {
           }
         }
       } catch (error) {
-        console.error(`Error fetching ${normalizedCategory} recipes from API, falling back to mock:`, error);
+        console.error(`Error fetching ${normalizedCategory} recipes from API:`, error);
       }
-    }
-
-    if (results.length === 0) {
-      const categoryMap = {
-        primi: 'First Course',
-        secondi: 'Main Course',
-        contorni: 'Side Dish',
-        dolci: 'Dessert'
-      };
-      const targetLabel = categoryMap[normalizedCategory];
-      if (targetLabel) {
-        results = mockRecipes.filter(r => r.recipeTypeLabel === targetLabel);
-      } else {
-        results = [...mockRecipes];
-      }
-
-      const prefs = getLocalDietPreferences();
-      if (prefs.vegetarian) results = results.filter(r => r.vegetarian);
-      if (prefs.vegan) results = results.filter(r => r.vegan);
-      if (prefs.dairyFree) results = results.filter(r => r.dairyFree);
-
-      results = results.slice(0, limit);
     }
     return results;
   },
@@ -290,30 +244,13 @@ export default {
           });
         }
       } catch (error) {
-        console.error('Error fetching recipe of the day from API, falling back to mock:', error);
-      }
-    }
-
-    if (!result) {
-      const carbonara = mockRecipes.find(r => r.id === 999002);
-      result = carbonara || mockRecipes[0];
-      if (result) {
-        result = {
-          ...result,
-          category: result.dishTypes?.length > 0 ? result.dishTypes[0] : 'Main Course',
-          origin: result.origin || 'Italy'
-        };
+        console.error('Error fetching recipe of the day from API:', error);
       }
     }
     return result;
   },
 
   async getRecipeById(id) {
-    const mockRecipe = mockRecipes.find(r => String(r.id) === String(id));
-    if (mockRecipe) {
-      return mockRecipe;
-    }
-
     if (API_KEY) {
       try {
         const url = `${BASE_URL}/${id}/information?apiKey=${API_KEY}&includeNutrition=true`;
@@ -323,10 +260,10 @@ export default {
           return await prepareRecipeDetail(data);
         }
       } catch (error) {
-        console.error(`Error fetching recipe ${id} from API, falling back to mock:`, error);
+        console.error(`Error fetching recipe ${id} from API:`, error);
       }
     }
-    return mockRecipe || null;
+    return null;
   }
 };
 
@@ -482,17 +419,8 @@ export const getAllRecipes = async (query = 'Italian', limit = 12) => {
         }
       }
     } catch (error) {
-      console.error("Errore nel recupero dei suggerimenti dall'API, falling back to mock:", error);
+      console.error("Errore nel recupero dei suggerimenti dall'API:", error);
     }
-  }
-
-  if (results.length === 0) {
-    const q = normalizeTitleForComparison(query || '');
-    results = mockRecipes.filter(recipe => {
-      const titleNormalized = normalizeTitleForComparison(recipe.title || '');
-      const summaryNormalized = normalizeTitleForComparison(recipe.summary || '');
-      return titleNormalized.includes(q) || summaryNormalized.includes(q);
-    }).slice(0, limit);
   }
 
   return results;
